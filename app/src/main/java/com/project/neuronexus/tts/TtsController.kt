@@ -6,21 +6,32 @@ import java.util.Locale
 
 class TtsController(context: Context) {
 
-    private lateinit var tts: TextToSpeech
+    private var tts: TextToSpeech? = null
+    private var isReady = false
 
     init {
         tts = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                tts.language = Locale.US
+                tts?.language = Locale.US
+                tts?.setSpeechRate(1.0f)
+                isReady = true
             }
         }
     }
 
     fun speak(text: String) {
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "tts1")
+        if (isReady && text.isNotBlank()) {
+            tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "neuronexus_tts")
+        }
+    }
+
+    fun stop() {
+        tts?.stop()
     }
 
     fun shutdown() {
-        tts.shutdown()
+        tts?.stop()
+        tts?.shutdown()
+        tts = null
     }
 }

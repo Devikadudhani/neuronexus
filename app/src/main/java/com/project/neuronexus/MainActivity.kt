@@ -8,11 +8,25 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.FabPosition
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import com.project.neuronexus.ui.VoiceTaskScreen
 import com.project.neuronexus.ui.VoiceTaskViewModel
 import com.project.neuronexus.ui.dashboard.NeuroNexusDashboard
 import com.project.neuronexus.ui.tasks.TasksScreen
 import com.project.neuronexus.ui.theme.NeuroNexusTheme
+import com.project.neuronexus.ui.components.SpeakerFab
+
+
 
 class MainActivity : ComponentActivity() {
 
@@ -23,35 +37,67 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(window, true)
 
         setContent {
             NeuroNexusTheme {
 
                 val navController = rememberNavController()
+                var currentScreen by remember { mutableStateOf("dashboard") }
 
-                NavHost(
-                    navController = navController,
-                    startDestination = "dashboard"
-                ) {
+                val screenText = when (currentScreen) {
+                    "dashboard" -> "Welcome to NeuroNexus Dashboard."
+                    "tasks" -> "This is the Tasks screen."
+                    "voice_task" -> "This is the Voice Task screen."
+                    else -> "Welcome to NeuroNexus."
+                }
 
-                    // -------- DASHBOARD --------
-                    composable("dashboard") {
-                        NeuroNexusDashboard(
-                            onTasksClick = {
-                                navController.navigate("tasks")
-                            }
-                        )
-                    }
+                Scaffold(
+                    floatingActionButton = {
+                        // SpeakerFab positioned just above bottom navbar
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp), // distance from bottom navbar
+                            verticalArrangement = Arrangement.Bottom,
+                            horizontalAlignment = Alignment.End // FAB on the right
+                        ) {
+                            SpeakerFab(textToRead = screenText)
+                        }
+                    },
+                    floatingActionButtonPosition = FabPosition.End // can also use Center
+                ) { paddingValues ->
 
-                    // -------- TASK LIST --------
-                    composable("tasks") {
-                        TasksScreen(navController = navController)
-                    }
+                    NavHost(
+                        navController = navController,
+                        startDestination = "dashboard",
+                        modifier = Modifier
+                            .padding(
+                                top = 8.dp, // reduced top margin
+                                bottom = paddingValues.calculateBottomPadding()
+                            )
+                            .fillMaxSize()
+                    ) {
 
-                    // -------- VOICE TASK --------
-                    composable("voice_task") {
-                        VoiceTaskScreen(viewModel = viewModel)
+                        composable("dashboard") {
+                            currentScreen = "dashboard"
+                            NeuroNexusDashboard(
+                                onTasksClick = {
+                                    currentScreen = "tasks"
+                                    navController.navigate("tasks")
+                                }
+                            )
+                        }
+
+                        composable("tasks") {
+                            currentScreen = "tasks"
+                            TasksScreen(navController = navController)
+                        }
+
+                        composable("voice_task") {
+                            currentScreen = "voice_task"
+                            VoiceTaskScreen(viewModel = viewModel)
+                        }
                     }
                 }
             }
