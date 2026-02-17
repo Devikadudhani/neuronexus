@@ -90,11 +90,14 @@ fun TasksScreen(
                 )
 
                 TaskItem(
-                    title = "Face Capture",
-                    description = "Perform facial expressions to assess motor function.",
-                    bgColor = Color(0xFFFEF9C3),
-                    onStartClick = { }
+                    title = "Narrative Recall",
+                    description = "Listen carefully to the short story and answer the question.",
+                    bgColor = Color(0xFFFFE4F2),
+                    onStartClick = {
+                        navController.navigate("narrative_recall")
+                    }
                 )
+
             }
         }
     }
