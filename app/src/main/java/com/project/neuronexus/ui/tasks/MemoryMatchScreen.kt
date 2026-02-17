@@ -20,9 +20,12 @@ import androidx.navigation.NavController
 import com.project.neuronexus.R
 import com.project.neuronexus.ui.components.CustomBottomBar
 import com.project.neuronexus.ui.components.NeuroTopBar
+import androidx.compose.ui.platform.LocalConfiguration
 
 @Composable
 fun MemoryMatchScreen(navController: NavController) {
+    val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
     Column(
         modifier = Modifier
@@ -64,25 +67,28 @@ fun MemoryMatchScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(40.dp))
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()    // takes remaining screen space
+            BoxWithConstraints(
+                modifier = Modifier.fillMaxSize()
             ) {
 
-                // 🔹 Mascot Image (Bottom Left)
+                val boxWidth = maxWidth
+                val boxHeight = maxHeight
+
+                // 🔹 Mascot Image (Huge & Proportional)
                 Image(
                     painter = painterResource(id = R.drawable.mascot_img),
                     contentDescription = "Mascot",
                     modifier = Modifier
-                        .size(260.dp)   // 🔥 now this WILL change properly
-                        .scale(1.8f)
-                        .offset(x = (-10).dp, y = (-50).dp)
-                        .align(Alignment.BottomStart),
-//                      .padding(start = 24.dp, bottom = 40.dp)
+                        .size(boxWidth * 1.3f)   // 🔥 huge but scales properly
+                        .align(Alignment.BottomStart)
+                        .offset(
+                            x = boxWidth * (-0.09f),
+                            y = boxHeight * (-0.05f)
+                        ),
                     contentScale = ContentScale.Crop
                 )
 
-                // 🔹 Start Button (Right Side, Mid Level)
+                // 🔹 Start Button (UNCHANGED SIZE)
                 Button(
                     onClick = { },
                     shape = RoundedCornerShape(50),
@@ -90,10 +96,12 @@ fun MemoryMatchScreen(navController: NavController) {
                         containerColor = Color(0xFFB39DDB)
                     ),
                     modifier = Modifier
-                        .height(55.dp)
-                        .width(170.dp)
-                        .offset(x = (9).dp, y = (-150).dp)
+                        .height(55.dp)     // ✅ same
+                        .width(170.dp)     // ✅ same
                         .align(Alignment.CenterEnd)
+                        .offset(
+                            y = boxHeight * (-0.32f)  // proportional vertical shift
+                        )
                         .padding(end = 32.dp)
                 ) {
                     Text(
@@ -104,6 +112,7 @@ fun MemoryMatchScreen(navController: NavController) {
                     )
                 }
             }
+
 
 
 
