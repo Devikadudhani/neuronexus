@@ -21,7 +21,7 @@ import com.project.neuronexus.R
 import com.project.neuronexus.ui.components.CustomBottomBar
 import com.project.neuronexus.ui.components.NeuroTopBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.VolumeUp
+
 
 @Composable
 fun NarrativeRecallScreen(navController: NavController) {
@@ -117,11 +117,11 @@ fun NarrativeRecallScreen(navController: NavController) {
                         .align(Alignment.BottomEnd)
                         .padding(16.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.VolumeUp,
-                        contentDescription = "Sound",
-                        tint = Color.White
-                    )
+//                    Icon(
+//                        imageVector = Icons.Default.VolumeUp,
+//                        contentDescription = "Sound",
+//                        tint = Color.White
+//                    )
                 }
             }
         }

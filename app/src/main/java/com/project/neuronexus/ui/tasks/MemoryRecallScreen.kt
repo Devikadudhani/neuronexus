@@ -1,3 +1,4 @@
+
 package com.project.neuronexus.ui.tasks
 
 import androidx.compose.foundation.Image
@@ -8,7 +9,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -23,7 +23,7 @@ import com.project.neuronexus.ui.components.NeuroTopBar
 import androidx.compose.ui.platform.LocalConfiguration
 
 @Composable
-fun MemoryMatchScreen(navController: NavController) {
+fun MemoryRecallScreen(navController: NavController) {
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
@@ -46,7 +46,7 @@ fun MemoryMatchScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "MEMORY MATCH",
+                text = "MEMORY RECALL",
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF6B4E8E)
@@ -59,7 +59,7 @@ fun MemoryMatchScreen(navController: NavController) {
                 colors = CardDefaults.cardColors(containerColor = Color.White)
             ) {
                 Text(
-                    text = "You will be shown pictures with names. Try to remember each pair. Later you’ll be asked to match the correct name with its picture.",
+                    text = "Now, try to match the names with the correct pictures you saw earlier.",
                     modifier = Modifier.padding(16.dp),
                     textAlign = TextAlign.Center
                 )
@@ -90,7 +90,7 @@ fun MemoryMatchScreen(navController: NavController) {
 
                 // 🔹 Start Button (UNCHANGED SIZE)
                 Button(
-                    onClick = {navController.navigate("memory_preview") },
+                    onClick = {navController.navigate("memory_mcq") },
                     shape = RoundedCornerShape(50),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFFB39DDB)

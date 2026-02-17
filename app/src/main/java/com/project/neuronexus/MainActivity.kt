@@ -14,12 +14,20 @@ import com.project.neuronexus.ui.dashboard.NeuroNexusDashboard
 import com.project.neuronexus.ui.tasks.TasksScreen
 import com.project.neuronexus.ui.tasks.MemoryMatchScreen
 import com.project.neuronexus.ui.community.CommunityPage
+import com.project.neuronexus.ui.tasks.MemoryMcqScreen
+import com.project.neuronexus.ui.tasks.MemoryPreviewScreen
+import com.project.neuronexus.ui.tasks.MemoryRecallScreen
 import com.project.neuronexus.ui.theme.NeuroNexusTheme
 import com.project.neuronexus.ui.tasks.NarrativeRecallScreen
 import com.project.neuronexus.ui.tasks.StoryScreen
 import com.project.neuronexus.ui.tasks.RecallPhaseScreen
 import com.project.neuronexus.ui.tasks.RecallQuestionScreen
 import com.project.neuronexus.ui.tasks.RecallResultScreen
+import androidx.navigation.NavType
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.project.neuronexus.ui.tasks.MemoryScoreScreen
+
 
 class MainActivity : ComponentActivity() {
 
@@ -66,6 +74,14 @@ class MainActivity : ComponentActivity() {
                         NarrativeRecallScreen(navController)
                     }
 
+                    composable("memory_preview") {
+                        MemoryPreviewScreen(navController)
+                    }
+                    composable("memory_recall") {
+                        MemoryRecallScreen(navController)
+                    }
+
+
                     // -------- VOICE TASK --------
                     composable("voice_task") {
                         VoiceTaskScreen(
@@ -86,6 +102,19 @@ class MainActivity : ComponentActivity() {
                         val score = backStackEntry.arguments?.getString("score")?.toInt() ?: 0
                         RecallResultScreen(navController, score)
                     }
+
+                    composable("memory_mcq") {
+                        MemoryMcqScreen(navController)
+                    }
+
+                    composable(
+                        route = "memory_score/{score}",
+                        arguments = listOf(navArgument("score") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val score = backStackEntry.arguments?.getInt("score") ?: 0
+                        MemoryScoreScreen(navController, score)
+                    }
+
 
 
 
