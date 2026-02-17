@@ -79,7 +79,7 @@ fun MemoryMatchScreen(navController: NavController) {
                     painter = painterResource(id = R.drawable.mascot_img),
                     contentDescription = "Mascot",
                     modifier = Modifier
-                        .size(boxWidth * 1.3f)   // 🔥 huge but scales properly
+                        .size(boxWidth * 1.3f)
                         .align(Alignment.BottomStart)
                         .offset(
                             x = boxWidth * (-0.09f),
@@ -96,11 +96,11 @@ fun MemoryMatchScreen(navController: NavController) {
                         containerColor = Color(0xFFB39DDB)
                     ),
                     modifier = Modifier
-                        .height(55.dp)     // ✅ same
-                        .width(170.dp)     // ✅ same
+                        .height(55.dp)
+                        .width(170.dp)
                         .align(Alignment.CenterEnd)
                         .offset(
-                            y = boxHeight * (-0.32f)  // proportional vertical shift
+                            y = boxHeight * (-0.32f)
                         )
                         .padding(end = 32.dp)
                 ) {

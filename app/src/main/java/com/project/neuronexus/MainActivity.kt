@@ -54,21 +54,23 @@ class MainActivity : ComponentActivity() {
 
                     // -------- MEMORY MATCH --------
                     composable("memory_match") {
-                        MemoryMatchScreen(navController)
+                        MemoryMatchScreen(navController = navController)
                     }
 
                     // -------- VOICE TASK --------
                     composable("voice_task") {
-                        VoiceTaskScreen(viewModel = viewModel)
+                        VoiceTaskScreen(
+                            navController = navController,
+                            viewModel = viewModel
+                        )
                     }
 
                     // -------- COMMUNITY PAGE --------
                     composable("community") {
-                        CommunityPage(navController)
+                        CommunityPage(navController = navController)
                     }
                 }
             }
         }
     }
 }
-

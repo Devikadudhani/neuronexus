@@ -82,7 +82,9 @@ fun TasksScreen(
                     title = "Reading Test",
                     description = "Read the text aloud to evaluate speech and fluency.",
                     bgColor = Color(0xFFFFE4F2),
-                    onStartClick = { }
+                    onStartClick = {
+                        navController.navigate("voice_task")
+                    }
                 )
 
                 TaskItem(
