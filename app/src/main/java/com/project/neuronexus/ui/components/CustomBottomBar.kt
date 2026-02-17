@@ -7,8 +7,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-//import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.*
@@ -17,12 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.material.icons.filled.Share
-
+import androidx.compose.foundation.layout.navigationBarsPadding
 
 @Composable
-fun CustomBottomBar() {
-
+fun CustomBottomBar(
+    onHomeClick: () -> Unit,
+    onTasksClick: () -> Unit,
+    onSettingsClick: () -> Unit,
+    onShareClick: () -> Unit
+) {
     var selectedItem by remember { mutableStateOf(0) }
 
     Box(
@@ -44,22 +47,34 @@ fun CustomBottomBar() {
             BottomBarIcon(
                 icon = Icons.Default.Home,
                 isSelected = selectedItem == 0
-            ) { selectedItem = 0 }
+            ) {
+                selectedItem = 0
+                onHomeClick()
+            }
 
             BottomBarIcon(
                 icon = Icons.Default.List,
                 isSelected = selectedItem == 1
-            ) { selectedItem = 1 }
+            ) {
+                selectedItem = 1
+                onTasksClick()
+            }
 
             BottomBarIcon(
                 icon = Icons.Default.Settings,
                 isSelected = selectedItem == 2
-            ) { selectedItem = 2 }
+            ) {
+                selectedItem = 2
+                onSettingsClick()
+            }
 
             BottomBarIcon(
                 icon = Icons.Default.Share,
                 isSelected = selectedItem == 3
-            ) { selectedItem = 3 }
+            ) {
+                selectedItem = 3
+                onShareClick()
+            }
         }
     }
 }
@@ -74,9 +89,7 @@ fun BottomBarIcon(
         modifier = Modifier
             .size(56.dp)
             .clip(CircleShape)
-            .background(
-                if (isSelected) Color(0xFFB39DDB) else Color.Transparent
-            ),
+            .background(if (isSelected) Color(0xFFB39DDB) else Color.Transparent),
         contentAlignment = Alignment.Center
     ) {
         IconButton(onClick = onClick) {

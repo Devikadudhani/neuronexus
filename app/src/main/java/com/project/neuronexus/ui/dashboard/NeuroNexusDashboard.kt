@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-//import androidx.compose.ui.layout.offset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,16 +23,25 @@ import com.project.neuronexus.ui.components.SpeakerFab
 @Composable
 fun NeuroNexusDashboard(
     onTasksClick: () -> Unit,
+    onHomeClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
+    onShareClick: () -> Unit = {},
     dashboardText: String = "Welcome to your NeuroNexus dashboard. Points: 550 coins. Condition: All is well."
 ) {
     Scaffold(
         topBar = { NeuroTopBar() },
-        bottomBar = { CustomBottomBar() },
+        bottomBar = {
+            CustomBottomBar(
+                onHomeClick = onHomeClick,
+                onTasksClick = onTasksClick,
+                onSettingsClick = onSettingsClick,
+                onShareClick = onShareClick
+            )
+        },
         floatingActionButton = {
             SpeakerFab(
                 textToRead = dashboardText,
                 modifier = Modifier.padding(bottom = 0.dp)
-
             )
         },
         floatingActionButtonPosition = FabPosition.End
