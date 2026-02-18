@@ -47,7 +47,7 @@ fun ProfileScreen(navController: NavController) {
 
             // Profile Image
             Image(
-                painter = painterResource(R.drawable.mascot_img),
+                painter = painterResource(R.drawable.img),
                 contentDescription = "Profile",
                 modifier = Modifier
                     .size(90.dp)
@@ -57,14 +57,14 @@ fun ProfileScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "ETHAN JOHNSON",
+                text = "Harshita Bansal",
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp,
                 color = Color(0xFF6B4E8E)
             )
 
             Text(
-                text = "ethan2006",
+                text = "harshita006",
                 color = Color.Gray,
                 fontSize = 14.sp
             )
@@ -86,7 +86,7 @@ fun ProfileScreen(navController: NavController) {
 
                     StatItem(
                         icon = Icons.Default.Description,
-                        value = "88/100",
+                        value = "8/10",
                         label = ""
                     )
 
@@ -98,7 +98,7 @@ fun ProfileScreen(navController: NavController) {
 
                     StatItem(
                         icon = Icons.Default.CalendarToday,
-                        value = "18",
+                        value = "8",
                         label = "Last Task"
                     )
                 }

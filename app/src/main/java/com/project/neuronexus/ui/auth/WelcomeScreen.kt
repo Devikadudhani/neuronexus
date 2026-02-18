@@ -25,9 +25,9 @@ fun WelcomeScreen(navController: NavController) {
     ) {
 
         Image(
-            painter = painterResource(R.drawable.app_logo),
+            painter = painterResource(R.drawable.img_1),
             contentDescription = "Logo",
-            modifier = Modifier.size(120.dp)
+            modifier = Modifier.size(250.dp)
         )
 
         Spacer(modifier = Modifier.height(40.dp))
